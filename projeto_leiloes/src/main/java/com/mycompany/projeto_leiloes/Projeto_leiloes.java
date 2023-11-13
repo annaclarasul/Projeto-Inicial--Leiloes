@@ -3,13 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
 
-package com.mycompany.leiloes;
+package com.mycompany.projeto_leiloes;
 
 /**
  *
  * @author ferna
  */
-public class Leiloes {
+public class Projeto_leiloes {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
