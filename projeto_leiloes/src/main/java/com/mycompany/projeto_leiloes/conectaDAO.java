@@ -1,3 +1,5 @@
+package com.mycompany.projeto_leiloes;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;

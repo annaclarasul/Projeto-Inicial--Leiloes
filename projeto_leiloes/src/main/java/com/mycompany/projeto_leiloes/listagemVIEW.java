@@ -1,3 +1,5 @@
+package com.mycompany.projeto_leiloes;
+
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
