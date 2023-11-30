@@ -158,7 +158,6 @@ public class cadastroVIEW extends javax.swing.JFrame {
         produtodao.cadastrarProduto(produto);
         
         
-        
         if(cadastroNome.getText() != null && cadastroValor.getText() != null){
             System.out.println("Cadastro realizado com sucesso!");
         }else{

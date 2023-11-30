@@ -2,6 +2,7 @@ package com.mycompany.projeto_leiloes;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /*
