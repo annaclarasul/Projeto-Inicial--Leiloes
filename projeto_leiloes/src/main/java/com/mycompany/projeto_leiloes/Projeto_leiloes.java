@@ -12,6 +12,13 @@ package com.mycompany.projeto_leiloes;
 public class Projeto_leiloes {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        ProdutosDTO produto = new ProdutosDTO();
+        produto.setNome("Nome do Produto");
+        produto.setValor(100);
+
+        ProdutosDAO produtoDAO = new ProdutosDAO();
+        produtoDAO.save(produto);
+
+        System.out.println("Produto salvo com sucesso!");
     }
 }
