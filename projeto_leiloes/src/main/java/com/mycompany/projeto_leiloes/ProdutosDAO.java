@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class ProdutosDAO {
     
-    private final Connection connection = conexao.getConexao();
+  
 
     Connection conn;
     PreparedStatement prep;
@@ -31,7 +31,7 @@ public class ProdutosDAO {
 
     public ArrayList<ProdutosDTO> listarProdutos() {
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM ProdutosDTO");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM ProdutosDTO");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -51,7 +51,7 @@ public class ProdutosDAO {
 
      void cadastrarProduto(ProdutosDTO produto) {
            try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO produto (nome) VALUES (?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO produto (nome) VALUES (?)");
             ps.setString(1, "nome");
             ps.setString(2, "valor");
             ps.execute();
