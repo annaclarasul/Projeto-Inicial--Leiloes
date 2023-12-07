@@ -5,6 +5,7 @@
 package com.mycompany.projeto_leiloes;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,15 +20,11 @@ import javax.swing.JOptionPane;
  * @author ferna
  */
 public class ProdutosDAO {
-    
   
-
     Connection conn;
     PreparedStatement prep;
     ResultSet resultset;
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
-
-
 
     public ArrayList<ProdutosDTO> listarProdutos() {
         try {
@@ -48,16 +45,60 @@ public class ProdutosDAO {
         }
         return listagem;
     }
+    
+    private Connection obterConexao() {
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/banco", "usuario", "senha");
+    } catch (Exception e) {
+        System.out.println("Erro ao obter conexão: " + e.getMessage());
+        return null;
+    }
+}
 
-     void cadastrarProduto(ProdutosDTO produto) {
-           try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO produto (nome) VALUES (?)");
-            ps.setString(1, "nome");
-            ps.setString(2, "valor");
-            ps.execute();
-            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
-        } catch (SQLException ex) {
-            Logger.getLogger(ProdutosDAO.class.getName()).log(Level.SEVERE, null, ex);
+private void fecharConexao(Connection connection) {
+    try {
+        if (connection != null) {
+            connection.close();
         }
-     }
+    } catch (Exception e) {
+        System.out.println("Erro ao fechar conexão: " + e.getMessage());
+    }
+}
+
+    public void cadastrarProduto(ProdutosDTO produto) {
+    Connection connection = obterConexao();
+    try {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "INSERT INTO produtos (nome, valor, status) VALUES (?, ?, ?)");
+        preparedStatement.setString(1, produto.getNome());
+        preparedStatement.setInt(2, produto.getValor());
+        preparedStatement.setString(3, produto.getStatus());
+
+        preparedStatement.executeUpdate();
+        System.out.println("Produto cadastrado com sucesso!");
+    } catch (Exception e) {
+        System.out.println("Erro ao cadastrar produto: " + e.getMessage());
+    } finally {
+        fecharConexao(connection);
+    }
+}
+   
+     public void venderProduto(int id) {
+    String sql = "UPDATE produtos SET status = 'Vendido' WHERE id = ?";
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+
+    try {
+        connection = obterConexao();
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
+
+    } catch (Exception e) {
+        System.out.println("Erro ao vender produto: " + e.getMessage());
+    } finally {
+        fecharConexao(connection);
+    }
+}
 }
