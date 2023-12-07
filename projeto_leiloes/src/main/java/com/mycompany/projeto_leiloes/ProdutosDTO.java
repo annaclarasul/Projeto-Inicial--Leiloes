@@ -14,6 +14,7 @@ public class ProdutosDTO {
     static void add(ProdutosDTO produto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
     private Integer id;
     private String nome;
     private Integer valor;

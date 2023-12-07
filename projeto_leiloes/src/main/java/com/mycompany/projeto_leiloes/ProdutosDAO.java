@@ -25,6 +25,8 @@ public class ProdutosDAO {
     PreparedStatement prep;
     ResultSet resultset;
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
+   
+
 
     public ArrayList<ProdutosDTO> listarProdutos() {
         try {
@@ -100,5 +102,19 @@ private void fecharConexao(Connection connection) {
     } finally {
         fecharConexao(connection);
     }
+     }
+    
+     public List<ProdutosDTO> listarProdutosVendidos() {
+        List<ProdutosDTO> listaProdutos = listarProdutos();
+        List<ProdutosDTO> produtosVendidos = new ArrayList<>();
+
+        for (ProdutosDTO produto : listaProdutos) {
+            if (produto.getStatus().equals("Vendido")) {
+                produtosVendidos.add(produto);
+            }
+        }
+        return produtosVendidos;
+    }
+  
 }
-}
+
